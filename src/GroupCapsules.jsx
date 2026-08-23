@@ -63,7 +63,6 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       gsap.set(bioRef.current, { opacity: 0, y: 15 })
       gsap.set(caps, { opacity: 0, y: (i) => (i === 0 ? 30 : -30) })
       gsap.set(membrane, { opacity: 0.7, scaleX: 0.6, scaleY: 0.2 })
-      gsap.set('.border-glow-stroke', { opacity: 0 })
 
       // Fase 1: membrana cresce
       tl.to(membrane, {
@@ -120,17 +119,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
           duration: 0.5,
           ease: 'back.out(1.2)',
         },
-        '-=0.4',
-      )
-      // Fade in the heavy border stroke ONLY AFTER movement to prevent GPU mask recalculations
-      .to(
-        wrapRef.current.querySelectorAll('.border-glow-stroke'),
-        {
-          opacity: 1,
-          duration: 0.4,
-          ease: 'power2.inOut',
-        },
-        '-=0.1'
+        '-=0.4'
       )
 
       return tl
@@ -218,13 +207,8 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
           ref={(el) => (capRefs.current[i] = el)}
           className="w-full pointer-events-auto"
         >
-          <BorderGlow
-            borderRadius={9999}
-            edgeSensitivity={20}
-            backgroundColor={group.video || group.image ? 'transparent' : 'rgba(10, 10, 12, 0.45)'}
-            colors={['#00bad7', '#4dd2e3', '#9ce3ee']}
-            coneSpread={28}
-            className="p-0 overflow-hidden relative pointer-events-auto"
+          <div
+            className={`p-0 overflow-hidden relative pointer-events-auto rounded-full border border-white/15 transition-colors ${group.video || group.image ? 'bg-transparent' : 'bg-[#0a0a0c]/45'}`}
           >
             {/* Fundo de vidro com blur apenas quando o card não tiver mídia */}
             {!group.video && !group.image && (
@@ -317,7 +301,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
                 </svg>
               </div>
             </a>
-          </BorderGlow>
+          </div>
         </div>
       ))}
 

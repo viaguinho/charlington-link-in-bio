@@ -371,11 +371,13 @@ export default function App() {
           </div>
 
           <div ref={nameRef} className="mt-9 text-center md:mt-12 font-['Helvetica',Arial,sans-serif]">
+            <span className="block mb-2 text-[11.5px] tracking-[0.26em] text-text-muted uppercase md:text-[13px]">
+              {PROFILE.specialty}
+            </span>
             <p className="text-[15px] leading-tight font-medium tracking-[0.22em] text-text-main uppercase md:text-[17px] md:tracking-[0.26em]">
               {PROFILE.name}
             </p>
-            <div className="mt-3 flex items-center justify-center gap-2 text-[11.5px] tracking-[0.26em] text-text-muted uppercase md:text-[13px]">
-              <span>{PROFILE.specialty} · </span>
+            <div className="mt-2.5 flex items-center justify-center text-[11.5px] tracking-[0.26em] text-text-muted uppercase md:text-[13px]">
               {Array.isArray(PROFILE.council) ? (
                 <RandomLetterSwap
                   labels={PROFILE.council}

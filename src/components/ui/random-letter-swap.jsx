@@ -56,11 +56,11 @@ export function RandomLetterSwap({
         animate(`.letter-${idx}`, { y: 0 }, { duration: 0 });
       });
 
-      animate(`.letter-secondary-${idx}`, { top: "0%" }, mergedTransition)
+      animate(`.letter-secondary-${idx}`, { y: "0%" }, mergedTransition)
         .then(() => {
           animate(
             `.letter-secondary-${idx}`,
-            { top: reverse ? "-100%" : "100%" },
+            { y: reverse ? "-100%" : "100%" },
             { duration: 0 }
           );
         })
@@ -93,7 +93,7 @@ export function RandomLetterSwap({
   return (
     <motion.span
       className={cn(
-        "relative flex flex-wrap items-center justify-center overflow-hidden",
+        "relative flex items-center justify-center overflow-hidden whitespace-nowrap",
         className
       )}
       onHoverStart={playAnimation}
@@ -104,18 +104,19 @@ export function RandomLetterSwap({
       {currentPadded.split("").map((letter, i) => (
         <span
           aria-hidden="true"
-          className="relative flex whitespace-pre"
+          className="inline-grid whitespace-pre overflow-visible"
+          style={{ placeItems: 'center' }}
           key={i}
         >
           <motion.span
-            className={`relative letter-${i}`}
-            style={{ top: 0 }}
+            className={`letter-${i}`}
+            style={{ gridArea: '1 / 1', y: 0 }}
           >
             {letter}
           </motion.span>
           <motion.span
-            className={`absolute letter-secondary-${i}`}
-            style={{ top: reverse ? "-100%" : "100%" }}
+            className={`letter-secondary-${i}`}
+            style={{ gridArea: '1 / 1', y: reverse ? "-100%" : "100%" }}
           >
             {nextPadded[i]}
           </motion.span>

@@ -191,6 +191,9 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
           />
 
           <header data-row className="relative z-10 mt-4 text-center md:mt-5 lg:mt-6 xl:mt-8">
+            <span className="block mb-1.5 text-[10px] leading-[1.45] text-white/45 md:text-[11px] lg:text-[13px] xl:text-[15px] tracking-[0.2em] uppercase">
+              {PROFILE.specialty}
+            </span>
             <h1 className="text-[12px] leading-[1.35] font-medium text-white/95 md:text-[13px] lg:text-[16px] xl:text-[18px]">
               {PROFILE.nameLines.map((l) => (
                 <span key={l} className="block">
@@ -198,18 +201,17 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
                 </span>
               ))}
             </h1>
-            <p className="mt-2 text-[10px] leading-[1.45] text-white/45 md:text-[11px] lg:text-[13px] xl:text-[15px]">
-              <span className="block">{PROFILE.specialty}</span>
+            <div className="mt-2 text-[10px] leading-[1.45] text-white/45 md:text-[11px] lg:text-[13px] xl:text-[15px]">
               {Array.isArray(PROFILE.council) ? (
                 <RandomLetterSwap
                   labels={PROFILE.council}
                   intervalMs={3000}
-                  className="w-full mt-1"
+                  className="w-full"
                 />
               ) : (
                 <span className="block">{PROFILE.council}</span>
               )}
-            </p>
+            </div>
           </header>
 
           <nav aria-label="Canais e consultórios" className="relative z-10 mt-4 w-full md:mt-5 lg:mt-7 xl:mt-9">
