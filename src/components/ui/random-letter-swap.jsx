@@ -104,19 +104,24 @@ export function RandomLetterSwap({
       {currentPadded.split("").map((letter, i) => (
         <span
           aria-hidden="true"
-          className="inline-grid whitespace-pre overflow-visible"
-          style={{ placeItems: 'center' }}
+          className="relative inline-flex whitespace-pre justify-center items-center"
           key={i}
         >
+          {/* Invisible static measuring block to enforce max width/height without layout thrashing */}
+          <span className="invisible inline-grid place-items-center" style={{ gridTemplateAreas: "'a'" }}>
+            <span style={{ gridArea: 'a' }}>{letter}</span>
+            <span style={{ gridArea: 'a' }}>{nextPadded[i]}</span>
+          </span>
+
           <motion.span
-            className={`letter-${i}`}
-            style={{ gridArea: '1 / 1', y: 0 }}
+            className={`absolute flex items-center justify-center letter-${i}`}
+            style={{ y: 0 }}
           >
             {letter}
           </motion.span>
           <motion.span
-            className={`letter-secondary-${i}`}
-            style={{ gridArea: '1 / 1', y: reverse ? "-100%" : "100%" }}
+            className={`absolute flex items-center justify-center letter-secondary-${i}`}
+            style={{ y: reverse ? "-100%" : "100%" }}
           >
             {nextPadded[i]}
           </motion.span>

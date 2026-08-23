@@ -102,9 +102,11 @@ export default function App() {
       // A cápsula é o offsetParent do slot e está centrada na viewport, então a
       // posição de layout dela se deriva da própria altura — sem ler transform.
       const capsule = slot.offsetParent
-      const capsuleTop = (window.innerHeight - (capsule?.offsetHeight || 0)) / 2
+      const containerH = capsuleWrapRef.current?.parentElement?.offsetHeight || window.innerHeight
+      const containerW = capsuleWrapRef.current?.parentElement?.offsetWidth || window.innerWidth
+      const capsuleTop = (containerH - (capsule?.offsetHeight || 0)) / 2
       const slotCenterY = capsuleTop + slot.offsetTop + slot.offsetHeight / 2
-      const slotCenterX = window.innerWidth / 2
+      const slotCenterX = containerW / 2
 
       lastMeasure = {
         logoW,
@@ -296,7 +298,7 @@ export default function App() {
         sobre preto puro produz cinza chapado. A referência só parece vidro
         porque há uma grade colorida de projetos atrás dela.
       */}
-      <div ref={prismWrapRef} className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+      <div ref={prismWrapRef} className="pointer-events-none fixed top-0 inset-x-0 h-lvh z-0" aria-hidden="true">
         <Prism
           animationType="rotate"
           timeScale={reduced ? 0 : 0.32}
@@ -327,7 +329,7 @@ export default function App() {
       />
 
       {/* ── Cápsula de vidro: superfície única, destino do logo ────────── */}
-      <div className="pointer-events-none fixed inset-0 z-20 grid place-items-center px-4">
+      <div className="pointer-events-none fixed top-0 inset-x-0 h-svh z-20 grid place-items-center px-4">
         <div
           ref={capsuleWrapRef}
           inert={!capsuleLive}
@@ -343,7 +345,7 @@ export default function App() {
         (z-30). Invertido, o backdrop-blur da cápsula é pintado sobre a marca e
         a escurece justamente onde ela precisa de contraste.
       */}
-      <div className="pointer-events-none fixed inset-0 z-30 grid place-items-center px-6">
+      <div className="pointer-events-none fixed top-0 inset-x-0 h-svh z-30 grid place-items-center px-6">
         <div ref={columnRef} className="flex flex-col items-center">
           <div className="relative grid place-items-center">
             <div
