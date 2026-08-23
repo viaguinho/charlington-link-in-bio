@@ -164,7 +164,7 @@ export default function FaqModal({ onClose }) {
               Perguntas Frequentes
             </h2>
             <p className="text-[13px] leading-relaxed text-gray-700 max-w-sm mx-auto">
-              Tudo o que você precisa saber sobre o atendimento.
+              Tudo o que você precisa saber para ter mais segurança e<br /> tranquilidade no atendimento neuroinfantil.
             </p>
           </div>
           <button 
