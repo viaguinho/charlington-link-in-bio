@@ -158,13 +158,13 @@ export default function FaqModal({ onClose }) {
         <div className="relative z-10 p-5 md:p-6 border-b border-black/10 text-center shrink-0">
           <div className="max-w-md mx-auto">
             <span className="text-[11px] font-medium tracking-[0.2em] text-gray-600 uppercase mb-2 block">
-              Suporte & Informações
+              Informações
             </span>
             <h2 className="text-2xl font-light text-gray-900 tracking-wide mb-3">
               Perguntas Frequentes
             </h2>
             <p className="text-[13px] leading-relaxed text-gray-700 max-w-sm mx-auto">
-              Tudo o que você precisa saber para ter mais segurança e tranquilidade em cada etapa do atendimento neuroinfantil.
+              Tudo o que você precisa saber sobre o atendimento.
             </p>
           </div>
           <button 
