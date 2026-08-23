@@ -163,8 +163,8 @@ export default function FaqModal({ onClose }) {
             <h2 className="text-2xl font-light text-gray-900 tracking-wide mb-3">
               Perguntas Frequentes
             </h2>
-            <p className="text-[13px] leading-relaxed text-gray-700 max-w-sm mx-auto">
-              Tudo o que você precisa saber para ter mais segurança e<br /> tranquilidade no atendimento neuroinfantil.
+            <p className="text-[13px] leading-relaxed text-gray-700 max-w-[340px] mx-auto text-balance">
+              Tudo o que você precisa saber para ter mais<br /> segurança e tranquilidade no atendimento.
             </p>
           </div>
           <button 
