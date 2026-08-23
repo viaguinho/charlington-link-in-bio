@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exemplo — sistema de design Dr. Charlington</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--font-family); color:var(--text-on-light); background:var(--surface-light);}
+  .wrap{max-width:var(--content-max-width); margin:0 auto; padding:0 var(--space-32);}
+
+  /* nav */
+  nav{position:sticky; top:var(--space-24); z-index:10; display:flex; justify-content:center; margin-bottom:0;}
+  .nav-pill{
+    display:flex; align-items:center; gap:var(--space-32);
+    background:#fff; border-radius:var(--radius-pill); padding:var(--space-12) var(--space-24);
+    box-shadow:none; border:var(--border-hairline) solid var(--border-light-subtle);
+  }
+  .nav-pill .logo{width:32px; height:32px; border-radius:50%; background:var(--accent); flex-shrink:0; min-width:var(--touch-target-min); min-height:var(--touch-target-min); display:flex; align-items:center; justify-content:center;}
+  .nav-pill a{color:var(--text-on-light); text-decoration:none; font-size:var(--text-caption); font-weight:var(--font-weight-medium); padding:var(--space-12) 0; min-height:var(--touch-target-min); display:inline-flex; align-items:center;}
+  .nav-links{display:flex; gap:var(--space-24);}
+
+  /* hero */
+  .hero{padding:var(--space-96) 0 var(--space-96); text-align:left;}
+  .eyebrow{font-size:var(--text-eyebrow); letter-spacing:var(--text-eyebrow-tracking); text-transform:uppercase; color:var(--text-muted-light); margin-bottom:var(--space-12);}
+  h1{font-size:var(--text-hero); font-weight:var(--font-weight-medium); line-height:1.1; letter-spacing:-0.01em; margin-bottom:var(--space-16);}
+  .cred{font-size:var(--text-caption); color:var(--text-muted-light); margin-bottom:var(--space-32);}
+  .actions{display:flex; gap:var(--space-12); align-items:center;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:var(--touch-target-min);
+    padding:var(--space-12) var(--space-24); border-radius:var(--radius-pill); font-size:var(--text-caption); font-weight:var(--font-weight-medium);
+    text-decoration:none; transition:opacity var(--duration-state) var(--ease-out);
+  }
+  .btn:hover{opacity:0.85;}
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-outline{background:transparent; color:var(--accent); border:var(--border-hairline) solid var(--accent);}
+
+  /* method (light) */
+  .section-light{padding:var(--space-96) 0;}
+  .method-grid{display:grid; grid-template-columns:220px 1fr; gap:var(--space-48);}
+  .col-label{font-size:13px; color:var(--text-muted-light);}
+  .col-label strong{display:block; color:var(--text-on-light); font-size:15px; font-weight:var(--font-weight-medium); margin-top:var(--space-4);}
+  h2{font-size:var(--text-section-title); font-weight:var(--font-weight-medium); letter-spacing:-0.01em; margin-bottom:var(--space-24);}
+  .body-text{font-size:var(--text-body); line-height:1.65; color:var(--text-muted-light); max-width:var(--measure); margin-bottom:var(--space-24);}
+  .link-arrow{display:inline-flex; align-items:center; gap:var(--space-12); color:var(--accent); text-decoration:none; font-size:15px; font-weight:var(--font-weight-medium);}
+  .link-arrow .circle{width:32px; height:32px; min-width:var(--touch-target-min); min-height:var(--touch-target-min); border-radius:50%; border:var(--border-hairline) solid var(--accent); display:flex; align-items:center; justify-content:center; font-size:16px; transition:transform var(--duration-state) var(--ease-out);}
+  .link-arrow:hover .circle{transform:translateX(3px);}
+
+  /* dark trajectory */
+  .section-dark{background:var(--surface-dark); color:var(--text-on-dark); padding:var(--space-96) 0;}
+  .traj-grid{display:grid; grid-template-columns:260px 1fr; gap:var(--space-64);}
+  .traj-nav-item{font-size:var(--text-caption); color:var(--text-muted-dark); padding:var(--space-16) 0; border-top:var(--border-hairline) solid var(--border-dark-subtle);}
+  .traj-nav-item.active{color:var(--text-on-dark); font-weight:var(--font-weight-medium);}
+  .traj-nav-item .num{color:var(--accent); font-size:var(--text-eyebrow); display:block; margin-bottom:var(--space-4);}
+  h2.on-dark{color:var(--text-on-dark);}
+  ul.dash-list{list-style:none; margin-top:var(--space-24);}
+  ul.dash-list li{display:flex; gap:var(--space-12); padding:var(--space-16) 0; border-top:var(--border-hairline) solid var(--border-dark-subtle); font-size:16px; color:var(--text-muted-dark); line-height:1.5;}
+  ul.dash-list li span.mark{color:var(--accent); flex-shrink:0;}
+
+  /* testimonials */
+  .testi-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--space-24); margin-top:var(--space-48);}
+  .testi-card{background:rgba(255,255,255,0.03); border:var(--border-hairline) solid var(--border-dark-subtle); border-radius:var(--radius-card); padding:var(--space-32);}
+  .testi-card p{font-size:16px; line-height:1.6; color:var(--text-on-dark); margin-bottom:var(--space-24);}
+  .testi-foot{display:flex; align-items:center; gap:var(--space-12);}
+  .avatar{width:36px; height:36px; border-radius:50%; background:rgba(47,102,224,0.15); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:var(--font-weight-medium);}
+  .testi-name{font-size:var(--text-caption); font-weight:var(--font-weight-medium);}
+  .testi-role{font-size:var(--text-eyebrow); color:var(--text-muted-dark);}
+
+  /* faq */
+  .faq-header{text-align:center; margin-bottom:var(--space-48);}
+  .faq-header .eyebrow{color:var(--accent);}
+  .faq-header h2{margin-bottom:0;}
+  .faq-item{border-top:var(--border-hairline) solid var(--border-light-subtle); padding:var(--space-24) 0; min-height:var(--touch-target-min); display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .faq-item:last-child{border-bottom:var(--border-hairline) solid var(--border-light-subtle);}
+  .faq-item span.q{font-size:var(--text-body);}
+  .faq-item span.icon{font-size:20px; color:var(--text-muted-light);}
+
+  /* footer */
+  footer{background:var(--surface-dark); color:var(--text-muted-dark); padding:var(--space-64) 0 var(--space-48);}
+  .foot-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--space-48); font-size:var(--text-caption);}
+  footer h4{color:var(--text-on-dark); font-size:15px; font-weight:var(--font-weight-medium); margin-bottom:var(--space-16);}
+  footer a{color:var(--text-muted-dark); text-decoration:none;}
+
+  @media (max-width:820px){
+    .method-grid, .traj-grid, .foot-grid{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    h1{font-size:38px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-pill">
+    <div class="logo"></div>
+    <div class="nav-links">
+      <a href="#">Método</a>
+      <a href="#">Trajetória</a>
+      <a href="#">Artigos</a>
+      <a href="#">Info</a>
+      <a href="#">Agendar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow" style="margin-top:80px;">neurologista</p>
+    <h1>Dr. Charlington Cavalcante</h1>
+    <p class="cred">CRM-SP 173.176</p>
+    <div class="actions">
+      <a class="btn btn-outline" href="#">Neurologia</a>
+      <a class="btn btn-outline" href="#">Trajetória</a>
+      <a class="btn btn-primary" href="#">Agendar</a>
+    </div>
+  </div>
+</header>
+
+<section class="section-light">
+  <div class="wrap method-grid">
+    <div class="col-label">Método<strong>Transparente</strong></div>
+    <div>
+      <h2>Comunicação clara e empática</h2>
+      <p class="body-text">Além de falar, foco em explicar diagnósticos e tratamentos de forma compreensível, com canal aberto para dúvidas.</p>
+      <a class="link-arrow" href="#"><span class="circle">→</span> Agendar consulta</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="wrap traj-grid">
+    <div>
+      <p style="color:var(--text-muted-dark); font-size:14px; margin-bottom:8px;">Dr. Charlington Cavalcante</p>
+      <p style="color:var(--accent); font-size:15px; font-weight:500; margin-bottom:32px;">Trajetória acadêmica</p>
+      <div class="traj-nav-item active"><span class="num">01</span>Formações</div>
+      <div class="traj-nav-item"><span class="num">02</span>Pós-graduação</div>
+      <div class="traj-nav-item"><span class="num">03</span>Mestrado</div>
+    </div>
+    <div>
+      <h2 class="on-dark">Formação médica de excelência</h2>
+      <ul class="dash-list">
+        <li><span class="mark">—</span>Médico graduado pela Universidade Estadual do Ceará (UECE)</li>
+        <li><span class="mark">—</span>Residência em Pediatria pela Escola de Saúde Pública do Ceará (ESP-CE)</li>
+        <li><span class="mark">—</span>Especialização em Neurologia Infantil pela Universidade Estadual de Campinas (UNICAMP)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" style="padding-top:0;">
+  <div class="wrap">
+    <div class="faq-header" style="margin-top:80px;">
+      <p class="eyebrow">opiniões reais</p>
+      <h2 class="on-dark">O que dizem as famílias</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p>"Dr. Charlington já havia sido muito bem recomendado, com excelentes referências, e pudemos comprovar isso na prática."</p>
+        <div class="testi-foot">
+          <div class="avatar">K</div>
+          <div><div class="testi-name">Karina</div><div class="testi-role">Mãe de paciente</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p>"Excelente profissional. Muito atencioso, tira todas nossas dúvidas, consulta é bem detalhada e esclarecedora."</p>
+        <div class="testi-foot">
+          <div class="avatar">DF</div>
+          <div><div class="testi-name">Douglas A. Fideles</div><div class="testi-role">Paciente verificado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-light">
+  <div class="wrap">
+    <div class="faq-header">
+      <p class="eyebrow">suporte &amp; informações</p>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-item"><span class="q">Qual o horário de atendimento?</span><span class="icon">+</span></div>
+    <div class="faq-item"><span class="q">Como agendar uma consulta?</span><span class="icon">+</span></div>
+    <div class="faq-item"><span class="q">Aceita convênios?</span><span class="icon">+</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <h4>Nossos endereços</h4>
+      <p style="margin-bottom:16px;">Campinas-SP<br>Avenida José Rocha Bomfim 214</p>
+      <p>Fortaleza-CE<br>Av. Pontes Vieira, 2340, sala 704</p>
+    </div>
+    <div>
+      <h4>Horários</h4>
+      <p>Seg a Sex das 8:00 às 18:00<br>Somente com horário marcado.</p>
+    </div>
+    <div>
+      <h4>Redes sociais</h4>
+      <p><a href="#">Instagram</a> &nbsp; <a href="#">LinkedIn</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

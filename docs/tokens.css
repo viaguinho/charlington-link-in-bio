@@ -1,0 +1,57 @@
+/*
+  tokens.css — implementação em CSS de DESIGN.md
+  Fonte única de verdade dos valores atômicos (cor, tipografia, espaçamento,
+  forma, movimento). Nenhuma página deve declarar :root próprio — importe
+  este arquivo e use as variáveis abaixo.
+*/
+
+:root {
+  /* Cor — ver "## Cor" em DESIGN.md */
+  --surface-light: #F1F1EF;
+  --surface-dark: #0A0A0C;
+  --text-on-light: #17181C;
+  --text-on-dark: #F4F5F6;
+  --text-muted-dark: #9BA1AC;
+  --text-muted-light: #6C7078;
+  --accent: #2F66E0;
+  --border-light-subtle: rgba(0, 0, 0, 0.08);
+  --border-dark-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Tipografia — ver "## Tipografia" */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --text-eyebrow: 12px;
+  --text-eyebrow-tracking: 0.12em;
+  --text-caption: 14px;
+  --text-body: 17px;
+  --text-section-title: 40px;
+  --text-hero: 60px;
+  --measure: 70ch; /* 65–75ch */
+
+  /* Espaçamento — escala base 4, ver "## Espaçamento e layout" */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --content-max-width: 1140px; /* 1100–1200px */
+  --touch-target-min: 44px;
+
+  /* Forma e elevação — ver "## Forma e elevação" */
+  --radius-pill: 999px;
+  --radius-card: 18px; /* 16–20px */
+  --border-hairline: 1px;
+
+  /* Movimento — ver "## Movimento" */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-feedback: 150ms;  /* 100–150ms: clique, toggle */
+  --duration-state: 250ms;     /* 150–300ms: hover, accordion */
+  --duration-overlay: 400ms;   /* 300–500ms: modal, menu */
+}
