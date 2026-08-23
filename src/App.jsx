@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, useCallback } from 'react'
+import { useLayoutEffect, useRef, useState, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -43,6 +43,18 @@ export default function App() {
   const [logoReady, setLogoReady] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showFaq, setShowFaq] = useState(false)
+  const [fadeBg, setFadeBg] = useState(false)
+
+  useEffect(() => {
+    if (showFaq) {
+      setFadeBg(true)
+    } else {
+      const timer = setTimeout(() => setFadeBg(false), 300)
+      return () => clearTimeout(timer)
+    }
+  }, [showFaq])
+
+  const fadeClass = fadeBg ? `max-md:transition-opacity max-md:duration-300 ${showFaq ? 'max-md:!opacity-0 max-md:!pointer-events-none' : ''}` : ''
 
   /*
     A cápsula existe no DOM desde o início (para o GSAP animá-la), mas só passa a
@@ -319,7 +331,7 @@ export default function App() {
         <div
           ref={capsuleWrapRef}
           inert={!capsuleLive}
-          className="will-change-transform"
+          className={`will-change-transform ${fadeClass}`}
         >
           <Capsule live={capsuleLive} slotRef={slotRef} onBackToTop={backToTop} />
         </div>
@@ -370,7 +382,7 @@ export default function App() {
             </div>
           </div>
 
-          <div ref={nameRef} className="mt-9 text-center md:mt-12 font-['Helvetica',Arial,sans-serif]">
+          <div ref={nameRef} className={`mt-9 text-center md:mt-12 font-['Helvetica',Arial,sans-serif] ${fadeClass}`}>
             <span className="block mb-2 text-[11.5px] tracking-[0.26em] text-text-muted uppercase md:text-[13px]">
               {PROFILE.specialty}
             </span>
@@ -404,7 +416,7 @@ export default function App() {
       <div
         ref={cueRef}
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 bottom-8 z-30 flex flex-col items-center gap-2 text-center text-[10px] tracking-[0.28em] text-text-muted/70 uppercase md:bottom-10 md:text-[11px]"
+        className={`pointer-events-none fixed inset-x-0 bottom-8 z-30 flex flex-col items-center gap-2 text-center text-[10px] tracking-[0.28em] text-text-muted/70 uppercase md:bottom-10 md:text-[11px] ${fadeClass}`}
       >
         <div className="flex h-6 w-3.5 items-start justify-center rounded-full border border-text-muted/40 p-0.75">
           <div className="h-1.5 w-1 rounded-full bg-text-muted/70 animate-scroll-wheel" />
@@ -416,7 +428,7 @@ export default function App() {
       <header
         ref={topNavRef}
         inert={capsuleLive}
-        className="fixed top-0 inset-x-0 z-30 flex items-center justify-between px-6 pt-3 md:px-10 md:pt-4"
+        className={`fixed top-0 inset-x-0 z-30 flex items-center justify-between px-6 pt-3 md:px-10 md:pt-4 ${fadeClass}`}
       >
         <nav aria-label="Navegação institucional" className="flex items-center gap-6 md:gap-8">
           {TOP_NAV.left.map((item) => (

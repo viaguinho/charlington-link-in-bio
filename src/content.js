@@ -54,27 +54,27 @@ export const TOP_NAV = {
 export const FAQ = [
   {
     question: 'Qual o horário de atendimento?',
-    answer: 'Segunda a sexta-feira das 08:00 às 18:00. Somente com horário marcado.',
+    answer: 'Segunda a sexta, das 08:00 às 18:00, apenas com horário&nbsp;marcado.',
   },
   {
     question: 'Como agendar uma consulta?',
-    answer: 'As consultas, tanto de Fortaleza quanto de Campinas, são agendadas por meio de comunicação via <a href="https://api.whatsapp.com/send/?phone=5519971502747&text=Ol%C3%A1%21+Vi+seu+contato+no+site+e+gostaria+de+agendar+um+servi%C3%A7o.+Obrigado+pela+aten%C3%A7%C3%A3o%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">WhatsApp +55 (19) 97150 2747</a>.',
+    answer: 'O agendamento para Campinas e Fortaleza é feito pelo&nbsp;<a href="https://api.whatsapp.com/send/?phone=5519971502747&text=Ol%C3%A1%21+Vi+seu+contato+no+site+e+gostaria+de+agendar+um+servi%C3%A7o.+Obrigado+pela+aten%C3%A7%C3%A3o%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">WhatsApp</a>.',
   },
   {
     question: 'Qual a localização?',
-    answer: '<strong>Campinas:</strong> Avenida José Rocha Bomfim 214, Campinas, SP.<br><a href="https://www.google.com/maps/search/?api=1&query=Avenida+Jos%C3%A9+Rocha+Bomfim,+214+-+Jardim+Santa+Genebra,+Campinas+-+SP" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">Ver localização no mapa</a><br><br><strong>Fortaleza:</strong> Av. Pontes Vieira, 2340, sala 704, Fortaleza, CE.<br><a href="https://www.google.com/maps/search/?api=1&query=Av.+Pontes+Vieira,+2340,+sala+704+-+Dion%C3%ADsio+Torres,+Fortaleza+-+CE" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">Ver localização no mapa</a>',
+    answer: '<strong>Campinas:</strong> Av. José Rocha Bomfim, 214,&nbsp;SP.<br><a href="https://www.google.com/maps/search/?api=1&query=Avenida+Jos%C3%A9+Rocha+Bomfim,+214+-+Jardim+Santa+Genebra,+Campinas+-+SP" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">Ver no&nbsp;mapa</a><br><br><strong>Fortaleza:</strong> Av. Pontes Vieira, 2340, sala 704,&nbsp;CE.<br><a href="https://www.google.com/maps/search/?api=1&query=Av.+Pontes+Vieira,+2340,+sala+704+-+Dion%C3%ADsio+Torres,+Fortaleza+-+CE" target="_blank" rel="noopener noreferrer" class="text-[#0071e3] hover:text-blue-700 underline underline-offset-2 transition-colors">Ver no&nbsp;mapa</a>',
   },
   {
     question: 'Aceita convênios?',
-    answer: 'O atendimento é realizado exclusivamente de forma particular, garantindo consultas mais completas, cuidadosas e individualizadas. <br><br>Para maior comodidade das famílias, emitimos toda a documentação necessária para a solicitação de reembolso junto ao convênio.',
+    answer: 'As consultas são estritamente particulares para garantir mais tempo e cuidado. Emitimos a documentação necessária para você solicitar reembolso no seu&nbsp;convênio.',
   },
   {
     question: 'Quais as formas de pagamento?',
-    answer: 'Para maior comodidade das famílias, aceitamos pagamentos em dinheiro, PIX, cartão de débito e cartão de crédito.',
+    answer: 'Aceitamos PIX, dinheiro e cartões de débito ou&nbsp;crédito.',
   },
   {
     question: 'Tem estacionamento?',
-    answer: 'Sim. Ambos os locais de atendimentos possuem estacionamento privativo.',
+    answer: 'Sim, ambos os consultórios contam com estacionamento&nbsp;privativo.',
   },
 ]
 
