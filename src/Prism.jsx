@@ -174,7 +174,7 @@ const Prism = memo(function Prism({
           col = clamp(hueRotation(uHueShift) * col, 0.0, 1.0);
         }
 
-        gl_FragColor = vec4(col, o.a);
+        gl_FragColor = vec4(col * o.a, o.a);
       }
     `
 
