@@ -27,7 +27,7 @@ import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js'
      transparente, com o Prism do DOM aparecendo normalmente.
 
   O `Prism` do DOM escreve alpha por pixel com blend desligado, então o
-  `#F1F1EF` do body atravessa. O backdrop reproduz essa composição — sem isso o
+  `#0A0A0C` do body atravessa. O backdrop reproduz essa composição — sem isso o
   campo refratado fica escuro demais e o vidro refrata uma página que não existe.
 */
 
@@ -527,7 +527,7 @@ void main(){
   col = clamp(mix(vec3(L), col, uSaturation), 0.0, 1.0);
 
   // O canvas do Prism escreve alpha por pixel com blend desligado, então o fundo
-  // #F1F1EF da página atravessa onde o campo é fraco. Sem reproduzir isso, o
+  // #0A0A0C da página atravessa onde o campo é fraco. Sem reproduzir isso, o
   // fundo fica escuro demais e o vidro refrata a página errada.
   col = mix(uPageColor, col, clamp(o.a, 0.0, 1.0));
 
@@ -580,7 +580,7 @@ export function createLogo3D({ canvas }, options = {}) {
     dispersion: 1.5,
     clearcoat: 0.4,
     clearcoatRoughness: 0.06,
-    // Tingir não é enfeite: sobre uma página #F1F1EF o vidro claro fica
+    // Tingir não é enfeite: sobre uma página #0A0A0C o vidro claro fica
     // invisível. O tingimento é o que dá contraste à marca contra o fundo.
     tint: '#2f66e0',
     tintDensity: 0.4,
@@ -617,7 +617,7 @@ export function createLogo3D({ canvas }, options = {}) {
     liftRadius: 0.18,
     liftFeather: 0.18,
     liftAmount: 0.9,
-    pageBackground: '#F1F1EF',
+    pageBackground: '#0A0A0C',
     ...options,
   }
 

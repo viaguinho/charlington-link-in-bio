@@ -24,20 +24,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
-  Paleta ajustada para tema claro clínico:
-    #F1F1EF  superfície clara oficial
-    #17181C  texto escuro principal
-    #6C7078  texto mutado
-    #2F66E0  azul cobalto da marca (accent)
-    #1ec1e6  ciano de brilho (mantido para alguns gradientes/halo)
+  Paleta quase preta original.
+  Não alinhar ao DESIGN.md!
 */
 @theme {
-  --color-ink: #F1F1EF;
+  --color-ink: #0A0A0C;
   --color-glow: #2F66E0;
   --color-deep: #253b7b;
   --color-mist: #81c9eb;
-  --color-text-main: #17181C;
-  --color-text-muted: #6C7078;
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #808080;
 
   /* Inter, como a referência. Caixa mista e tracking normal dentro da cápsula;
      caixa-alta com tracking largo só no herói. */
