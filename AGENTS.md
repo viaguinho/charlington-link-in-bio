@@ -16,14 +16,12 @@ sem TypeScript.
 
 ## Antes de mudar qualquer coisa, leia isto
 
-### 1. O rompimento com o design system é intencional
+### 1. Alinhamento ao design system (Nova recomendação)
 
 `docs/DESIGN.md`, `docs/DESIGN-SYSTEM.md` e `docs/tokens.css` descrevem o sistema do site
 oficial do médico: fundo claro `#F1F1EF`, azul cobalto `#2F66E0`, registro clínico e
-sereno. **Esta página não segue esse sistema, de propósito.** Ela é quase preta, com
-paleta derivada dos gradientes do logo.
-
-Não "corrija" essa inconsistência. Alinhar a página ao `DESIGN.md` desfaz o projeto.
+sereno. **Esta página deve seguir esse sistema.** O background deve ser branco/claro,
+mas o Prism deve ser mantido como o fundo vivo animado.
 
 Os documentos estão aqui porque as regras de voz, acessibilidade e espaçamento continuam
 valendo — em particular o alvo de toque mínimo de 44px, que já pegou um defeito real.

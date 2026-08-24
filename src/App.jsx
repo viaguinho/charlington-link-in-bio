@@ -316,7 +316,7 @@ export default function App() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 120% 80% at 50% 50%, rgba(10,10,12,0.85) 0%, rgba(10,10,12,0.65) 40%, rgba(10,10,12,0.4) 100%)',
+              'radial-gradient(ellipse 120% 80% at 50% 50%, rgba(241,241,239,0.85) 0%, rgba(241,241,239,0.65) 40%, rgba(241,241,239,0.4) 100%)',
           }}
         />
       </div>
@@ -357,7 +357,7 @@ export default function App() {
                 className="aspect-square w-[165%] rounded-full blur-[70px] md:blur-[110px]"
                 style={{
                   background:
-                    'radial-gradient(circle, rgba(47,102,224,0.18) 0%, rgba(30,193,230,0.12) 42%, rgba(10,10,12,0) 70%)',
+                    'radial-gradient(circle, rgba(47,102,224,0.18) 0%, rgba(30,193,230,0.12) 42%, rgba(241,241,239,0) 70%)',
                 }}
               />
             </div>
