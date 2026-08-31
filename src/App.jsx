@@ -41,6 +41,8 @@ export default function App() {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
   const [logoReady, setLogoReady] = useState(false)
+  const resolveLogoRef = useRef(null)
+  const logoPromiseRef = useRef(new Promise((res) => { resolveLogoRef.current = res }))
   const [showAbout, setShowAbout] = useState(false)
   const [showFaq, setShowFaq] = useState(false)
   const [fadeBg, setFadeBg] = useState(false)
@@ -177,6 +179,7 @@ export default function App() {
       const barDone = new Promise((res) => bar.eventCallback('onComplete', res))
       const assetsDone = Promise.all([
         document.fonts?.ready ?? Promise.resolve(),
+        logoPromiseRef.current,
         new Promise((res) => {
           const img = new Image()
           img.onload = img.onerror = res
@@ -378,8 +381,14 @@ export default function App() {
                 rotationSpeed={0.8}
                 baseRotationZ={-0.25}
                 floatSpeed={1.5}
-                onLoad={() => setLogoReady(true)}
-                onError={() => setLogoReady(true)}
+                onLoad={() => {
+                  setLogoReady(true)
+                  if (resolveLogoRef.current) resolveLogoRef.current()
+                }}
+                onError={() => {
+                  setLogoReady(true)
+                  if (resolveLogoRef.current) resolveLogoRef.current()
+                }}
               />
             </div>
           </div>
