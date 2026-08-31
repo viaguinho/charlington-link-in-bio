@@ -169,7 +169,7 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
         <GroupCapsules ref={groupsRef} onBack={handleBack} />
       ) : (
         <div
-          className={`relative rounded-full flex flex-col items-center w-[13.5rem] px-5 pt-8 pb-5.5 md:w-50 md:px-5 md:pt-8 md:pb-5.5 lg:w-60 lg:px-6 lg:pt-10 lg:pb-7 xl:w-68 xl:px-7 xl:pt-12 xl:pb-8 ${
+          className={`relative rounded-full flex flex-col items-center w-54 px-5 pt-8 pb-5.5 md:w-50 md:px-5 md:pt-8 md:pb-5.5 lg:w-60 lg:px-6 lg:pt-10 lg:pb-7 xl:w-68 xl:px-7 xl:pt-12 xl:pb-8 ${
             live ? 'pointer-events-auto' : 'pointer-events-none'
           }`}
         >
@@ -181,7 +181,7 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
             ref={slotRef}
             data-slot
             aria-hidden="true"
-            className="relative z-10 h-10 w-[3.5rem] md:h-11 md:w-14 lg:h-14 lg:w-18 xl:h-16 xl:w-20"
+            className="relative z-10 h-10 w-14 md:h-11 md:w-14 lg:h-14 lg:w-18 xl:h-16 xl:w-20"
           />
 
           <header data-row className="relative z-10 mt-2 text-center md:mt-2.5 lg:mt-3 xl:mt-4">
