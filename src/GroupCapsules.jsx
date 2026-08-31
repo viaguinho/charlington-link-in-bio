@@ -37,6 +37,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
   const portraitRef = useRef(null)
   const capRefs = useRef([])
   const bioRef = useRef(null)
+  const cueRef = useRef(null)
 
   const [showLogo, setShowLogo] = useState(false)
 
@@ -56,6 +57,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       const tl = gsap.timeline()
       const caps = capRefs.current.filter(Boolean)
       const membrane = membraneRef.current
+      const cue = cueRef.current
 
       // Estado inicial
       gsap.set(wrapRef.current, { opacity: 1 })
@@ -63,6 +65,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       gsap.set(bioRef.current, { opacity: 0, y: 15 })
       gsap.set(caps, { opacity: 0, y: (i) => (i === 0 ? 30 : -30) })
       gsap.set(membrane, { opacity: 0.7, scaleX: 0.6, scaleY: 0.2 })
+      if (cue) gsap.set(cue, { opacity: 0, y: 12 })
 
       // Fase 1: membrana cresce
       tl.to(membrane, {
@@ -121,6 +124,18 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
         },
         '-=0.4'
       )
+      if (cue) {
+        tl.to(
+          cue,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: 'power3.out',
+          },
+          '-=0.2',
+        )
+      }
 
       return tl
     },
@@ -132,6 +147,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
     animateOut() {
       const tl = gsap.timeline()
       const caps = capRefs.current.filter(Boolean)
+      const cue = cueRef.current
 
       tl.to(portraitRef.current, {
         opacity: 0,
@@ -154,7 +170,12 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
         ease: 'power3.in',
         stagger: 0.05,
       })
-      .to(wrapRef.current, { opacity: 0, duration: 0.1 }, '-=0.1')
+
+      if (cue) {
+        tl.to(cue, { opacity: 0, y: -10, duration: 0.25, ease: 'power3.in' }, 0)
+      }
+
+      tl.to(wrapRef.current, { opacity: 0, duration: 0.1 }, '-=0.1')
 
       return tl
     },
@@ -168,12 +189,12 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
   return (
     <div
       ref={wrapRef}
-      className="pointer-events-auto relative flex flex-col items-center gap-3.5 lg:gap-5 xl:gap-7 w-[min(92vw,26.875rem)] md:w-[min(92vw,28.75rem)] lg:w-[min(92vw,37.5rem)] xl:w-[min(92vw,50rem)] mt-12 md:mt-14 lg:mt-24"
+      className="pointer-events-auto relative flex flex-col items-center gap-2.5 md:gap-3.5 lg:gap-5 w-[min(92vw,26.875rem)] md:w-[min(92vw,28.75rem)] lg:w-[min(92vw,37.5rem)] xl:w-[min(92vw,50rem)] mt-3 md:mt-5 lg:mt-8"
     >
-      <div className="w-full flex flex-col items-center mt-2 mb-6 md:mt-4 md:mb-8 lg:mt-6 lg:mb-10 xl:mt-8 xl:mb-12 pointer-events-none z-10">
+      <div className="w-full flex flex-col items-center mt-1 mb-2 md:mt-2 md:mb-4 lg:mt-3 lg:mb-6 pointer-events-none z-10">
         <PortraitHero ref={portraitRef} />
         
-        <div ref={bioRef} className="mt-8 md:mt-10 lg:mt-12 flex flex-col items-center text-center gap-1.5">
+        <div ref={bioRef} className="mt-3 md:mt-5 lg:mt-6 flex flex-col items-center text-center gap-1.5">
           <p className="font-mono text-[11px] md:text-xs lg:text-[13px] tracking-[0.2em] text-white uppercase">
             <b className="bg-glow text-white px-1.5 py-0.5">Neurologia Infantil</b>
           </p>
@@ -220,7 +241,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${group.title} — ${group.sub}`}
-              className="group relative flex w-full items-center justify-between min-h-28.5 md:min-h-30.5 lg:min-h-40 xl:min-h-50 px-6 sm:px-7 md:px-8 lg:px-12 xl:px-16 py-3.5 lg:py-6 xl:py-8 focus-visible:outline-none transition-all duration-300 pointer-events-auto cursor-pointer"
+              className="group relative flex w-full items-center justify-between min-h-24 md:min-h-28 lg:min-h-36 xl:min-h-44 px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 lg:py-5 xl:py-7 focus-visible:outline-none transition-all duration-300 pointer-events-auto cursor-pointer"
             >
               {/* Camada de mídia (vídeo ou imagem) com definição cristalina */}
               {(group.video || group.image) && (
@@ -266,14 +287,14 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
 
                 {/* Título com a fonte Phudu da área Sobre */}
                 <h2
-                  className="mt-0.5 font-['Phudu',sans-serif] text-[20px] sm:text-[23px] md:text-[25px] lg:text-[34px] xl:text-[42px] font-normal leading-[1.05] tracking-tight uppercase text-white [text-shadow:0_3px_16px_rgba(0,0,0,0.6)]"
+                  className="mt-0.5 font-['Phudu',sans-serif] text-[18px] sm:text-[21px] md:text-[24px] lg:text-[32px] xl:text-[40px] font-normal leading-[1.05] tracking-tight uppercase text-white [text-shadow:0_3px_16px_rgba(0,0,0,0.6)]"
                 >
                   {group.title}
                 </h2>
 
                 {/* Subtítulo de ação com traço expansível */}
                 <div
-                  className="mt-1.5 lg:mt-3 font-mono-card text-[8.5px] md:text-[9.5px] lg:text-[12px] xl:text-[14px] font-normal tracking-[0.11em] uppercase text-white/60 group-hover:text-white inline-flex items-center gap-2 transition-colors duration-200"
+                  className="mt-1 lg:mt-2.5 font-mono-card text-[8.5px] md:text-[9.5px] lg:text-[12px] xl:text-[14px] font-normal tracking-[0.11em] uppercase text-white/60 group-hover:text-white inline-flex items-center gap-2 transition-colors duration-200"
                 >
                   <span
                     aria-hidden="true"
@@ -286,7 +307,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
               {/* Botão circular com seta em vidro fosco */}
               <div
                 aria-hidden="true"
-                className="absolute right-4 sm:right-5 md:right-6 lg:right-8 xl:right-10 top-1/2 -translate-y-1/2 z-20 size-9 md:size-10 lg:size-14 xl:size-16 rounded-full border border-white/20 bg-white/10 grid place-items-center text-white/80 transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:rotate-[-35deg] group-hover:scale-105 group-hover:bg-glow group-hover:text-white shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+                className="absolute right-4 sm:right-5 md:right-6 lg:right-8 xl:right-10 top-1/2 -translate-y-1/2 z-20 size-8.5 md:size-10 lg:size-13 xl:size-15 rounded-full border border-white/20 bg-white/10 grid place-items-center text-white/80 transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:rotate-[-35deg] group-hover:scale-105 group-hover:bg-glow group-hover:text-white shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -306,13 +327,13 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       ))}
 
       {/* Miniatura giratória do logo */}
-      <div className={`relative mt-8 mb-2 h-16 w-20 md:h-20 md:w-28 lg:h-24 lg:w-32 grid place-items-center pointer-events-none transition-opacity duration-1000 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
+      <div className={`relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none transition-opacity duration-700 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
         {showLogo && (
           <HeroLogo3D
             src={LOGO}
             className="absolute inset-0 size-full"
             highlight="#2F66E0"
-            scale={7}
+            scale={6}
             cameraDistance={8}
             floatIntensity={0.6}
             rotationIntensity={0.9}
@@ -323,16 +344,19 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
         )}
       </div>
 
-      {/* Convite de rolagem */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none flex flex-col items-center gap-2 text-center text-[10px] tracking-[0.28em] text-text-muted/70 uppercase md:text-[11px] mb-8 transition-opacity duration-1000 ${showLogo ? 'opacity-90' : 'opacity-0'}`}
+      {/* Informativo animado de rolar a tela para cima para voltar */}
+      <button
+        ref={cueRef}
+        type="button"
+        onClick={onBack}
+        aria-label="Role para cima para voltar"
+        className="pointer-events-auto flex flex-col items-center gap-1.5 text-center text-[10px] tracking-[0.24em] text-text-muted/90 hover:text-glow uppercase md:text-[11px] mb-4 pb-2 transition-all duration-200 cursor-pointer focus-visible:outline-none group"
       >
-        <div className="flex h-6 w-3.5 items-start justify-center rounded-full border border-text-muted/40 p-0.75 rotate-180">
-          <div className="h-1.5 w-1 rounded-full bg-text-muted/70 animate-scroll-wheel" />
+        <div className="flex h-5.5 w-3.5 items-start justify-center rounded-full border border-text-muted/60 p-0.75 rotate-180 transition-colors duration-200 group-hover:border-glow">
+          <div className="h-1.5 w-1 rounded-full bg-text-muted transition-colors duration-200 group-hover:bg-glow animate-scroll-wheel" />
         </div>
-        <span>{SCROLL_CUE}</span>
-      </div>
+        <span className="transition-colors duration-200 font-medium">Role para cima para voltar</span>
+      </button>
     </div>
   )
 })
