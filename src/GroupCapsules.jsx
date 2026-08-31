@@ -41,9 +41,9 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
   const [showLogo, setShowLogo] = useState(false)
 
   useEffect(() => {
-    // Atrasamos a montagem do WebGL em 1200ms para não travar a animação GSAP de transição
-    // (a animação leva ~1.05s, então 1200ms garante que ela terminou)
-    const timer = setTimeout(() => setShowLogo(true), 1200)
+    // Atrasamos a montagem levemente para não travar o início da animação de transição,
+    // mas não tanto a ponto de o usuário achar que está demorando.
+    const timer = setTimeout(() => setShowLogo(true), 300)
     return () => clearTimeout(timer)
   }, [])
 
@@ -129,10 +129,10 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
           {
             opacity: 1,
             y: 0,
-            duration: 0.45,
+            duration: 0.5,
             ease: 'power3.out',
           },
-          '-=0.2',
+          0.6, // Start earlier, parallel to the capsules expanding
         )
       }
 

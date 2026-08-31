@@ -139,7 +139,9 @@ export default function App() {
     lenis.on('scroll', ScrollTrigger.update)
     const tick = (t) => lenis.raf(t * 1000)
     gsap.ticker.add(tick)
-    gsap.ticker.lagSmoothing(0)
+    // Enable lag smoothing during loader to prevent the progress bar from jumping 
+    // when the main thread freezes while compiling WebGL shaders.
+    gsap.ticker.lagSmoothing(100, 16)
 
     const ctx = gsap.context(() => {
       const logo = logoRef.current
@@ -205,6 +207,8 @@ export default function App() {
           .to(cueRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.6)
           .add(() => {
             window.scrollTo(0, 0)
+            // Disable lag smoothing when scrolling starts, as required by Lenis
+            gsap.ticker.lagSmoothing(0)
             lenis.start()
             buildScrub()
           }, 1.0)
