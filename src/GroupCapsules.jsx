@@ -41,9 +41,9 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
   const [showLogo, setShowLogo] = useState(false)
 
   useEffect(() => {
-    // Atrasamos a montagem levemente para não travar o início da animação de transição,
-    // mas não tanto a ponto de o usuário achar que está demorando.
-    const timer = setTimeout(() => setShowLogo(true), 300)
+    // Atrasamos a montagem do WebGL em 1500ms para não travar a animação GSAP de transição
+    // (a animação leva ~1.45s, então 1500ms garante que ela terminou sem travamentos)
+    const timer = setTimeout(() => setShowLogo(true), 1500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -326,7 +326,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       ))}
 
       {/* Miniatura giratória do logo */}
-      <div className={`relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none transition-opacity duration-700 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
+      <div className={`relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none transition-opacity duration-300 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
         {showLogo && (
           <HeroLogo3D
             src={LOGO}
