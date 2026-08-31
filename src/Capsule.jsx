@@ -2,7 +2,6 @@ import { useState, useRef, useCallback, useLayoutEffect, memo } from 'react'
 import gsap from 'gsap'
 import { LINKS, ADDRESSES, PROFILE, SOCIALS } from './content'
 import { ArrowUp, ArrowUpRight, Instagram, Linkedin, Doctoralia } from './Icons'
-import BorderGlow from './BorderGlow'
 import { GlassShineCard } from './GlassShineCard'
 import { RandomLetterSwap } from './components/ui/random-letter-swap'
 import GroupCapsules from './GroupCapsules'
@@ -169,13 +168,8 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
       {view === 'groups' ? (
         <GroupCapsules ref={groupsRef} onBack={handleBack} />
       ) : (
-        <BorderGlow
-          borderRadius={9999}
-          edgeSensitivity={20}
-          backgroundColor="rgba(10, 10, 12, 0.25)"
-          colors={['#1ec1e6', '#81c9eb', '#a2e0f9']}
-          coneSpread={28}
-          className={`w-[13.5rem] px-5 pt-8 pb-5.5 md:w-50 md:px-5 md:pt-8 md:pb-5.5 lg:w-60 lg:px-6 lg:pt-10 lg:pb-7 xl:w-68 xl:px-7 xl:pt-12 xl:pb-8 ${
+        <div
+          className={`relative rounded-full flex flex-col items-center w-[13.5rem] px-5 pt-8 pb-5.5 md:w-50 md:px-5 md:pt-8 md:pb-5.5 lg:w-60 lg:px-6 lg:pt-10 lg:pb-7 xl:w-68 xl:px-7 xl:pt-12 xl:pb-8 ${
             live ? 'pointer-events-auto' : 'pointer-events-none'
           }`}
         >
@@ -314,7 +308,7 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
               <ArrowUp className="size-3 md:size-3 lg:size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
             </span>
           </button>
-        </BorderGlow>
+        </div>
       )}
     </div>
   )

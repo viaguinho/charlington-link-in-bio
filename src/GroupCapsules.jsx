@@ -1,7 +1,6 @@
 import { useRef, useLayoutEffect, forwardRef, useImperativeHandle, useState, useEffect } from 'react'
 import gsap from 'gsap'
 import { GROUPS, SCROLL_CUE } from './content'
-import BorderGlow from './BorderGlow'
 import { GlassShineCard } from './GlassShineCard'
 import PortraitHero from './PortraitHero'
 import HeroLogo3D from './HeroLogo3D'
