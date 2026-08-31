@@ -95,16 +95,21 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
     const el = flipRef.current
     if (!el) return
 
-    gsap.to(el, {
+    gsap.ticker.lagSmoothing(100, 16)
+    const tl = gsap.timeline({
+      onComplete: () => {
+        animatingRef.current = false
+        gsap.ticker.lagSmoothing(0)
+        setView('groups')
+      }
+    })
+
+    tl.to(el, {
       rotateZ: -90,
       scale: 0.8,
       opacity: 0,
       duration: 0.45,
       ease: 'power3.in',
-      onComplete: () => {
-        setView('groups')
-        // A entrada de groups será animada via useLayoutEffect em GroupCapsules
-      },
     })
   }, [])
 
@@ -117,10 +122,16 @@ const Capsule = memo(function Capsule({ live = true, slotRef, onBackToTop }) {
 
     const el = flipRef.current
 
+    gsap.ticker.lagSmoothing(100, 16)
+    const tl = gsap.timeline({
+      onComplete: () => {
+        animatingRef.current = false
+        gsap.ticker.lagSmoothing(0)
+      }
+    })
+
     // Anima saída das mini-cápsulas
     const outTl = groupsRef.current?.animateOut()
-
-    const tl = gsap.timeline()
 
     if (outTl) {
       tl.add(outTl)

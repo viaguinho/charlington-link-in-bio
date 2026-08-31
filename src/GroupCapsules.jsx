@@ -38,14 +38,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
   const bioRef = useRef(null)
   const cueRef = useRef(null)
 
-  const [showLogo, setShowLogo] = useState(false)
-
-  useEffect(() => {
-    // Atrasamos a montagem do WebGL em 1500ms para não travar a animação GSAP de transição
-    // (a animação leva ~1.45s, então 1500ms garante que ela terminou sem travamentos)
-    const timer = setTimeout(() => setShowLogo(true), 1500)
-    return () => clearTimeout(timer)
-  }, [])
+  const logoContainerRef = useRef(null)
 
   useImperativeHandle(ref, () => ({
     /*
@@ -65,6 +58,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       gsap.set(caps, { opacity: 0, y: (i) => (i === 0 ? 30 : -30) })
       gsap.set(membrane, { opacity: 0.7, scaleX: 0.6, scaleY: 0.2 })
       if (cue) gsap.set(cue, { opacity: 0, y: 12 })
+      if (logoContainerRef.current) gsap.set(logoContainerRef.current, { opacity: 0 })
 
       // Fase 1: membrana cresce
       tl.to(membrane, {
@@ -82,7 +76,12 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
         duration: 0.25,
         ease: 'power3.in',
       })
-      // Fase 3: cápsulas surgem com spring
+      // Fase 3: cápsulas e logo surgem
+      .to(
+        logoContainerRef.current,
+        { opacity: 0.9, duration: 0.5, ease: 'power2.out' },
+        0.3 // Starts at 0.3s (before cue)
+      )
       .to(
         portraitRef.current,
         {
@@ -172,6 +171,9 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
 
       if (cue) {
         tl.to(cue, { opacity: 0, y: -10, duration: 0.25, ease: 'power3.in' }, 0)
+      }
+      if (logoContainerRef.current) {
+        tl.to(logoContainerRef.current, { opacity: 0, duration: 0.35, ease: 'power3.in' }, 0)
       }
 
       tl.to(wrapRef.current, { opacity: 0, duration: 0.1 }, '-=0.1')
@@ -326,28 +328,22 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       ))}
 
       {/* Miniatura giratória do logo */}
-      <div className="relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none">
-        {/* Fallback 2D para exibição imediata antes do 3D carregar */}
-        <div className={`absolute inset-0 transition-opacity duration-700 ${showLogo ? 'opacity-0' : 'opacity-80'}`}>
-          <img src={LOGO} alt="" className="size-full object-contain" />
-        </div>
-        
-        <div className={`absolute inset-0 transition-opacity duration-300 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
-          {showLogo && (
-            <HeroLogo3D
-              src={LOGO}
-              className="absolute inset-0 size-full"
-              highlight="#2F66E0"
-              scale={6}
-              cameraDistance={8}
-              floatIntensity={0.6}
-              rotationIntensity={0.9}
-              rotationSpeed={1.5}
-              baseRotationZ={0}
-              floatSpeed={2}
-            />
-          )}
-        </div>
+      <div 
+        ref={logoContainerRef}
+        className="relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none opacity-0"
+      >
+        <HeroLogo3D
+          src={LOGO}
+          className="absolute inset-0 size-full"
+          highlight="#2F66E0"
+          scale={6}
+          cameraDistance={8}
+          floatIntensity={0.6}
+          rotationIntensity={0.9}
+          rotationSpeed={1.5}
+          baseRotationZ={0}
+          floatSpeed={2}
+        />
       </div>
 
       {/* Informativo animado de rolar a tela para cima para voltar */}
