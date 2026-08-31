@@ -326,21 +326,28 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
       ))}
 
       {/* Miniatura giratória do logo */}
-      <div className={`relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none transition-opacity duration-300 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
-        {showLogo && (
-          <HeroLogo3D
-            src={LOGO}
-            className="absolute inset-0 size-full"
-            highlight="#2F66E0"
-            scale={6}
-            cameraDistance={8}
-            floatIntensity={0.6}
-            rotationIntensity={0.9}
-            rotationSpeed={1.5}
-            baseRotationZ={0}
-            floatSpeed={2}
-          />
-        )}
+      <div className="relative mt-2 mb-0.5 h-12 w-16 md:h-14 md:w-20 lg:h-18 lg:w-24 grid place-items-center pointer-events-none">
+        {/* Fallback 2D para exibição imediata antes do 3D carregar */}
+        <div className={`absolute inset-0 transition-opacity duration-700 ${showLogo ? 'opacity-0' : 'opacity-80'}`}>
+          <img src={LOGO} alt="" className="size-full object-contain" />
+        </div>
+        
+        <div className={`absolute inset-0 transition-opacity duration-300 ${showLogo ? 'opacity-90' : 'opacity-0'}`}>
+          {showLogo && (
+            <HeroLogo3D
+              src={LOGO}
+              className="absolute inset-0 size-full"
+              highlight="#2F66E0"
+              scale={6}
+              cameraDistance={8}
+              floatIntensity={0.6}
+              rotationIntensity={0.9}
+              rotationSpeed={1.5}
+              baseRotationZ={0}
+              floatSpeed={2}
+            />
+          )}
+        </div>
       </div>
 
       {/* Informativo animado de rolar a tela para cima para voltar */}
