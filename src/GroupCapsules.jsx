@@ -349,7 +349,7 @@ const GroupCapsules = forwardRef(function GroupCapsules({ onBack }, ref) {
         type="button"
         onClick={onBack}
         aria-label="Role para cima para voltar"
-        className="pointer-events-auto flex flex-col items-center gap-1.5 text-center text-[10px] tracking-[0.24em] text-text-muted/90 hover:text-glow uppercase md:text-[11px] transition-all duration-200 cursor-pointer focus-visible:outline-none group fixed bottom-6 left-1/2 -translate-x-1/2 md:static md:bottom-auto md:left-auto md:translate-x-0 md:transform-none md:mb-4 md:pb-2"
+        className="pointer-events-auto flex flex-col items-center gap-1.5 text-center text-[10px] tracking-[0.24em] text-text-muted/90 hover:text-glow uppercase md:text-[11px] transition-all duration-200 cursor-pointer focus-visible:outline-none group fixed bottom-6 inset-x-0 mx-auto w-max md:static md:inset-x-auto md:mx-0 md:w-auto md:mb-4 md:pb-2"
       >
         <div className="flex h-5.5 w-3.5 items-start justify-center rounded-full border border-text-muted/60 p-0.75 rotate-180 transition-colors duration-200 group-hover:border-glow">
           <div className="h-1.5 w-1 rounded-full bg-text-muted transition-colors duration-200 group-hover:bg-glow animate-scroll-wheel" />
